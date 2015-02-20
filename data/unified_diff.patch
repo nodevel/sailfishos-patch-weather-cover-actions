@@ -1,0 +1,35 @@
+diff -ur sailfish-weather/cover/WeatherCover.qml sailfish-weather_2/cover/WeatherCover.qml
+--- orig/usr/share/sailfish-weather/cover/WeatherCover.qml	2015-02-20 00:03:44.000000000 +0100
++++ new/usr/share/sailfish-weather/cover/WeatherCover.qml	2015-02-20 00:12:27.853993787 +0100
+@@ -62,7 +62,17 @@
+         }
+     }
+     CoverActionList {
+-        enabled: error
++        enabled: savedWeathersModel.count === 0
++        CoverAction {
++            iconSource: "image://theme/icon-cover-search"
++            onTriggered: {
++                var alreadyOpen = pageStack.currentPage && pageStack.currentPage.objectName === "LocationSearchPage"
++                if (!alreadyOpen) {
++                    pageStack.push(Qt.resolvedUrl("../pages/LocationSearchPage.qml"), undefined, PageStackAction.Immediate)
++                }
++                weatherApplication.activate()
++            }
++        }
+         CoverAction {
+             iconSource: "image://theme/icon-cover-sync"
+             onTriggered: {
+@@ -79,6 +89,12 @@
+                 current = !current
+             }
+         }
++        CoverAction {
++            iconSource: "image://theme/icon-cover-sync"
++            onTriggered: {
++                weatherApplication.reloadAll()
++            }
++        }
+     }
+     Connections {
+         target: savedWeathersModel

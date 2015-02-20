@@ -1,0 +1,8 @@
+{
+    "name": "Weather cover actions",
+    "description": "Enhances cover actions of the weather app to resemble the Meecast application.",
+    "category": "other",
+    "infos": {
+        "maintainer": "nodevel"
+    }
+}
